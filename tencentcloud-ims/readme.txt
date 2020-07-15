@@ -1,5 +1,4 @@
 === 腾讯云图片内容安全（IMS） ===
-Contributors: hankzzhang, tiejunhu, chahuang
 Tags: 腾讯云wordpress, IMS, 图片审核, 图片内容安全, 腾讯云
 Donate link: https://openapp.qq.com/Wordpress/ims.html
 Requires at least: 5.0

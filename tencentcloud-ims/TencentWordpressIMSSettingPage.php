@@ -62,7 +62,7 @@ function TencentWordpressIMSSettingPage()
                     <div class="col-lg-9">
                         <form method="post" id="ims-options-form" action="" data-ajax-url="<?php echo $ajaxUrl ?>">
                             <div class="form-group">
-                                <label class="col-form-label col-lg-2 lable_padding_left" for="ims-option-custom-key">自定义密钥</label>
+                                <label class="col-form-label col-lg-2 lable_padding_left" for="ims-option-custom-key"><h5>自定义密钥</h5></label>
                                 <div class="custom-control custom-switch div_custom_switch_padding_top"
                                      style="margin-top: -2.3rem;margin-left: 13rem;">
                                     <input type="checkbox" class="custom-control-input"
@@ -74,7 +74,7 @@ function TencentWordpressIMSSettingPage()
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-form-label col-lg-2" for="txc-ims-secret-id">SecretId</label>
+                                <label class="col-form-label col-lg-2" for="txc-ims-secret-id"><h5>SecretId</h5></label>
                                 <input id="txc-ims-secret-id" type="password" class="col-lg-5 is-invalid"
                                        placeholder="SecretId" <?php if ( $customKey !== $IMSOptions::CUSTOM_KEY ) {
                                     echo 'disabled="disabled"';
@@ -83,7 +83,7 @@ function TencentWordpressIMSSettingPage()
                                 <span id="ims-secret-id-change-type" class="dashicons dashicons-hidden"></span>
                             </div>
                             <div class="form-group">
-                                <label class="col-form-label col-lg-2" for="txc-ims-secret-key">SecretKey</label>
+                                <label class="col-form-label col-lg-2" for="txc-ims-secret-key"><h5>SecretKey</h5></label>
                                 <input id="txc-ims-secret-key" type="password" class="col-lg-5 is-invalid"
                                        placeholder="SecretKey" <?php if ( $customKey !== $IMSOptions::CUSTOM_KEY ) {
                                     echo 'disabled="disabled"';
@@ -98,7 +98,7 @@ function TencentWordpressIMSSettingPage()
                             </div>
 
                             <div class="form-group">
-                                <label class="col-form-label col-lg-2 lable_padding_left" for="ims-check-url-img">审核URL图片</label>
+                                <label class="col-form-label col-lg-2 lable_padding_left" for="ims-check-url-img"><h5>审核URL图片</h5></label>
                                 <div class="custom-control custom-switch div_custom_switch_padding_top"
                                      style="margin-top: -2.3rem;margin-left: 13rem;">
                                     <input type="checkbox" class="custom-control-input"
@@ -118,7 +118,7 @@ function TencentWordpressIMSSettingPage()
         </div>
         <button id="ims-options-update-button" type="button" class="btn btn-primary">保存配置</button>
         <div style="text-align: center;flex: 0 0 auto;margin-top: 3rem;">
-            <a href="https://openapp.qq.com/Wordpress/ims.html" target="_blank">文档中心</a> | <a href="https://github.com/Tencent-Cloud-Plugins/tencentcloud-wordpress-plugin-ims" target="_blank">GitHub</a> | <a
+            <a href="https://openapp.qq.com/docs/Wordpress/ims.html" target="_blank">文档中心</a> | <a href="https://github.com/Tencent-Cloud-Plugins/tencentcloud-wordpress-plugin-ims" target="_blank">GitHub</a> | <a
                     href="https://support.qq.com/product/164613" target="_blank">意见反馈</a>
         </div>
     </div>

@@ -118,7 +118,7 @@ class TencentWordPressIMSActions
             $staticData['data']['site_report_on'] = intval($commonOption['site_report_on']);
             $staticData['data']['site_sec_on'] = intval($commonOption['site_sec_on']);
             if ($commonOption['site_report_on'] === true && isset($commonOption['secret_id']) && isset($commonOption['secret_key'])) {
-                $static_data['data']['site_global_uin'] = TencentWordpressPluginsSettingActions::getUserUinBySecret($commonOption['secret_id'], $commonOption['secret_key']);
+                $staticData['data']['site_global_uin'] = TencentWordpressPluginsSettingActions::getUserUinBySecret($commonOption['secret_id'], $commonOption['secret_key']);
             }
         }
 
