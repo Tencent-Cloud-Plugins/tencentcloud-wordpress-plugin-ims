@@ -285,7 +285,7 @@ class TencentWordPressIMSActions
     {
         //只在后台配置页引入
         if (strpos($hookSuffix,'page_TencentWordpressIMSSettingPage') !== false){
-            wp_register_style('IMS_back_admin_css', TENCENT_WORDPRESS_TMS_CSS_DIR . 'bootstrap.min.css');
+            wp_register_style('IMS_back_admin_css', TENCENT_WORDPRESS_IMS_CSS_DIR . 'bootstrap.min.css');
             wp_enqueue_style('IMS_back_admin_css');
         }
     }
