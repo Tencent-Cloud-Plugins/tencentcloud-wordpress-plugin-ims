@@ -113,30 +113,9 @@ class TencentWordPressIMSActions
         $staticData['data']['site_id'] = TencentWordpressPluginsSettingActions::getWordPressSiteID();
         $staticData['data']['site_url'] = TencentWordpressPluginsSettingActions::getWordPressSiteUrl();
         $staticData['data']['site_app'] = TencentWordpressPluginsSettingActions::getWordPressSiteApp();
-        $commonOption = get_option(TENCENT_WORDPRESS_COMMON_OPTIONS);
-        if (!empty($commonOption)) {
-            $staticData['data']['site_report_on'] = intval($commonOption['site_report_on']);
-            $staticData['data']['site_sec_on'] = intval($commonOption['site_sec_on']);
-            if ($commonOption['site_report_on'] === true && isset($commonOption['secret_id']) && isset($commonOption['secret_key'])) {
-                $staticData['data']['site_global_uin'] = TencentWordpressPluginsSettingActions::getUserUinBySecret($commonOption['secret_id'], $commonOption['secret_key']);
-            }
-        }
-
         $IMSOptions = self::getIMSOptionsObject();
-        if ($IMSOptions->getCustomKey() === $IMSOptions::CUSTOM_KEY) {
-            $staticData['data']['ims_uin'] = TencentWordpressPluginsSettingActions::getUserUinBySecret($IMSOptions->getSecretID(), $IMSOptions->getSecretKey());
-        }
-        $staticData['data']['ims_sec_on'] = $IMSOptions->getCustomKey();
-        switch ($action){
-            case 'activate':
-            case 'save_configuration':
-            $staticData['data']['ims_on_at'] = time();
-                break;
-            case 'deactivate':
-            case 'uninstall':
-            $staticData['data']['ims_off_at'] = time();
-                break;
-        }
+        $staticData['data']['uin'] = TencentWordpressPluginsSettingActions::getUserUinBySecret($IMSOptions->getSecretID(), $IMSOptions->getSecretKey());
+        $staticData['data']['cust_sec_on'] = $IMSOptions->getCustomKey() === $IMSOptions::CUSTOM_KEY ?1:2;
         return $staticData;
     }
 
@@ -317,7 +296,7 @@ class TencentWordPressIMSActions
             $IMSOptions->setSecretKey($this->filterPostParam('secretKey'));
             $IMSOptions->setCheckUrlImg($this->filterPostParam('checkUrlImg',$IMSOptions::DO_NOT_CHECK));
             self::requirePluginCenterClass();
-            $staticData = self::getTencentCloudWordPressStaticData('save_configuration');
+            $staticData = self::getTencentCloudWordPressStaticData('save_config');
             TencentWordpressPluginsSettingActions::sendUserExperienceInfo($staticData);
             update_option(TENCENT_WORDPRESS_IMS_OPTIONS,$IMSOptions,true);
             wp_send_json_success(array('msg'=>'保存成功'));

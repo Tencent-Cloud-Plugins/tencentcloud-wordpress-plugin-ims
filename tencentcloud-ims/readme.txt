@@ -1,11 +1,11 @@
 === 腾讯云图片内容安全（IMS） ===
 Contributors: TencentCloud
-Tags: 腾讯云, 图片审核, 图片内容安全, Tencent, IMS
-Donate link: https://openapp.qq.com/Wordpress/ims.html
+Tags: 腾讯云, 图片审核, 图片内容安全, Tencent Cloud, qcloud, IMS, 春雨
+Donate link: https://openapp.qq.com/docs/Wordpress/ims.html
 Requires at least: 5.0
 Tested up to: 5.4.1
 Requires PHP: 5.6
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: Apache 2.0
 License URI: http://www.apache.org/licenses/LICENSE-2.0.txt
 
@@ -25,7 +25,12 @@ tencentcloud-ims插件是一款腾讯云研发的，提供给WordPress站长使�
 
 == Screenshots ==
 1. screenshot-1.png
+2. screenshot-2.png
+3. screenshot-3.png
 
 == Changelog ==
 = 1.0.0 =
 * 对媒体库上传和URL插入的图片进行内容检测和过滤.
+
+= 1.0.1 =
+* 支持在windows环境下运行.
