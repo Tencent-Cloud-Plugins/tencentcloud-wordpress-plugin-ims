@@ -15,6 +15,7 @@
  */
 jQuery(function ($) {
     var ajaxUrl = $('#ims-options-form').data('ajax-url');
+    var pageSize = 10;
     //展示接口返回
     function showAjaxReturnMsg(msg,success) {
         var parent = $('#show-ims-ajax-return-msg').parent();
@@ -57,6 +58,31 @@ jQuery(function ($) {
     $('#ims-secret-key-change-type').click(function () {
         changeInputType($('#txc-ims-secret-key'), $(this));
     });
+
+    $('#sub-tab-ims-settings').click(function () {
+        $('#sub-tab-ims-settings').removeClass('active').addClass('active');
+        $('#sub-tab-img-records').removeClass('active');
+
+        $('#body-sub-tab-ims-settings').addClass('active show');
+        $('#body-sub-tab-img-records').removeClass('active show');
+    });
+
+    $('#sub-tab-img-records').click(function () {
+        $('#sub-tab-img-records').removeClass('active').addClass('active');
+        $('#sub-tab-ims-settings').removeClass('active');
+
+        $('#body-sub-tab-img-records').addClass('active show');
+        $('#body-sub-tab-ims-settings').removeClass('active show');
+
+        $("#more_list  tr:not(:first)").remove();
+        getImsData(1, pageSize)
+        $('#ims_current_page')[0].innerText = '1';
+        $('#ims_record_previous_page').removeClass('disabled').addClass('disabled');
+        $('#ims_record_previous_page').removeAttr('disabled');
+        $('#ims_record_next_page').removeAttr('disabled');
+        $('#ims_record_next_page').removeClass('disabled');
+    });
+
     //ajax保存配置
     $('#ims-options-update-button').click(function () {
         var secretID = $("#txc-ims-secret-id").val()
@@ -85,5 +111,93 @@ jQuery(function ($) {
             }
         });
     });
+
+    //命中记录
+    $('#search_ims_record_button').click(function () {
+        $("#more_list  tr:not(:first)").remove();
+        getImsData(1,pageSize)
+        $('#ims_current_page')[0].innerText = '1';
+        $('#ims_record_previous_page').removeClass('disabled').addClass('disabled');
+        $('#ims_record_previous_page').removeAttr('disabled');
+        $('#ims_record_next_page').removeAttr('disabled');
+        $('#ims_record_next_page').removeClass('disabled');
+    });
+
+    //获取上一页
+    $('#ims_record_previous_page').click(function () {
+        if ($(this).attr('disabled') === 'disabled') {
+            return;
+        }
+        var currentPage = $(this).attr('data-current-page');
+        if (currentPage === '1' || currentPage < '1') {
+            return;
+        }
+        $("#more_list  tr:not(:first)").remove();
+        currentPage--
+        getImsData(currentPage,pageSize);
+        $('#ims_current_page')[0].innerText = currentPage;
+        $(this).attr('data-current-page',currentPage);
+        $('#ims_record_next_page').removeAttr('disabled');
+        $('#ims_record_next_page').removeClass('disabled');
+    });
+
+    //获取下一页
+    $('#ims_record_next_page').click(function () {
+        if ($(this).attr('disabled') === 'disabled') {
+            return;
+        }
+        var currentPage = $('#ims_record_previous_page').attr('data-current-page');
+        currentPage++
+        $("#more_list  tr:not(:first)").remove();
+        getImsData(currentPage,pageSize);
+        $('#ims_current_page')[0].innerText = currentPage;
+        $('#ims_record_previous_page').removeAttr('disabled');
+        $('#ims_record_previous_page').attr('data-current-page',currentPage).removeClass('disabled');
+    });
+
+    //ajax获取短信记录
+    function getImsData(page,pageSize){
+        var filename = $("#search_file_name").val()
+        $.ajax({
+            type: "post",
+            url: ajaxUrl,
+            dataType:"json",
+            data: {
+                action: "get_ims_records",
+                keyword: filename,
+                page:page,
+                page_size:pageSize
+            },
+            success: function(response) {
+                var list = response.data.list;
+                var html = '';
+                var status = '';
+                if (!response.success) {
+                    alert(response.data.msg);
+                    return;
+                }
+                //填充短信记录表格
+                $.each(list, function(i, item) {
+                    html += '<tr>';
+                    html += '<td>' +item['user_login']+'('+ item['user_nicename'] +')'+'</td>';
+                    html += '<td>' +item['user_email']+'</td>';
+                    html += '<td>' +item['user_role']+'</td>';
+                    html += '<td>' +item['status']+'</td>';
+                    html += '<td>' +item['type']+'</td>';
+                    html += '<td>' +item['create_time']+'</td>';
+                    html += '<td>' +item['file_name']+'</td>';
+                    html += '</tr>';
+                });
+                $('#more_list').append(html);
+
+                if (page <= 1) {
+                    $("#ims_record_previous_page").attr('disabled','disabled').addClass('disabled');
+                }
+                if (!response.data.hasNext){
+                    $("#ims_record_next_page").attr('disabled','disabled').addClass('disabled');
+                }
+            }
+        });
+    }
 
 });
