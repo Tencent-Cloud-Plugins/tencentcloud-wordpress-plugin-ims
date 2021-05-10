@@ -59,6 +59,9 @@ add_filter('plugin_action_links', array($IMSPluginActions, 'pluginSettingPageLin
 //ajax保存配置
 add_action('wp_ajax_update_IMS_options', array($IMSPluginActions, 'updateIMSOptions'));
 
+//ajax查询违规图片检查记录
+add_action('wp_ajax_get_ims_records', array($IMSPluginActions, 'getIMSImageRecords'));
+
 //只在上传图片的时候
 if (strpos($_SERVER['REQUEST_URI'], '/async-upload.php') !== false) {
     add_filter( 'wp_handle_upload_prefilter', array($IMSPluginActions, 'examineImageInMedia') );

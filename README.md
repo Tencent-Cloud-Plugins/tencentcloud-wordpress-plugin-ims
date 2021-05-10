@@ -7,7 +7,7 @@
 | ---------- | ------------------------------------------------------------ |
 | 中文名称      | 腾讯云图片内容安全（IMS）插件                                         |
 | 英文名称   | tencentcloud-ims                                       |
-| 最新版本   | v1.0.1 (2020.12.11)                                           |
+| 最新版本   | v1.0.2 (2021.5.8)                                           |
 | 适用平台 | [WordPress](https://wordpress.org/)                             |
 | 适用产品 | [腾讯云图片内容安全（IMS）](https://cloud.tencent.com/product/ims) |
 | 文档中心   | [春雨文档中心](https://openapp.qq.com/docs/Wordpress/ims.html) |
@@ -45,6 +45,8 @@
 ![](./images/ims3.png)
 > 对发文章时上传的图片进行检测，检测不通过将会提示如上信息
 
+![](./images/ims4.png)
+> 可以查询到所有违规的图片上传记录信息
 
 ### 4.2.名词解释
 - **自定义密钥：** 插件提供统一密钥管理，既可在多个腾讯云插件之间共享SecretId和SecretKey，也可为插件配置单独定义的腾讯云密钥。
@@ -64,6 +66,8 @@
 > 暂无
 
 ## 7.GitHub版本迭代记录
+### 2021.05.08 tencentcloud-wordpress-plugin-ims v1.0.2
+- 新增违规图片上传记录功能
 
 ### 2020.12.11 tencentcloud-wordpress-plugin-ims v1.0.1
 - 支持在windows环境下运行
